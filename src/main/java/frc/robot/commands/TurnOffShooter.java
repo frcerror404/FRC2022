@@ -23,6 +23,6 @@ public class TurnOffShooter extends InstantCommand {
 
   @Override
   public void initialize() {
-    m_shooter.setShooterSpeed(0.0);
+    m_shooter.setShooterPercentage(0.0);
   }
 }

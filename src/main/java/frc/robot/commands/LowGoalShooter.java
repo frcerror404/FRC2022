@@ -22,6 +22,6 @@ public class LowGoalShooter extends InstantCommand {
   @Override
   public void initialize() {
     // Low goal .35, high goal .65.
-    m_shooter.setShooterSpeed(0.35);
+    m_shooter.setShooterPercentage(0.35);
   }
 }

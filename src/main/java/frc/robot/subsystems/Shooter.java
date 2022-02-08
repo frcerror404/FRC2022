@@ -8,7 +8,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,29 +25,35 @@ public class Shooter extends SubsystemBase {
    */
   private final WPI_TalonFX shooterMotorA = new WPI_TalonFX(Constants.kShooterA);
   private final WPI_TalonFX shooterMotorB = new WPI_TalonFX(Constants.kShooterB);
-  private boolean _inverted_test = false;
+
+  private TalonFXConfiguration aConfiguration = new TalonFXConfiguration();
+
 
   public Shooter() {
+    // Set the configuration's PIDF values
+    aConfiguration.slot0.kP = Constants.kShooterPIDF.kP;
+    aConfiguration.slot0.kI = Constants.kShooterPIDF.kI;
+    aConfiguration.slot0.kD = Constants.kShooterPIDF.kD;
+    aConfiguration.slot0.kF = Constants.kShooterPIDF.kF;
+    aConfiguration.primaryPID.selectedFeedbackSensor = TalonFXFeedbackDevice.IntegratedSensor.toFeedbackDevice();
+
+    shooterMotorA.setInverted(true);
     shooterMotorB.follow(shooterMotorA);
     shooterMotorB.setInverted(TalonFXInvertType.OpposeMaster);
 
-    System.out.println("Shooter 1 Inverted? " + (shooterMotorA.getInverted() ? "True" : "False"));
-    shooterMotorA.setInverted(false);
-    System.out.println("Shooter 1 Inverted? " + (shooterMotorA.getInverted() ? "True" : "False"));
+    shooterMotorA.configAllSettings(aConfiguration);
   }
   
   /**
    * @param ShooterSpeed the speed 0-1
    */
-  public void setShooterSpeed(double shooterSpeed) {
-
-    // if(shooterSpeed > 0) {
-    //   _inverted_test = !_inverted_test;
-    //   shooterMotorA.setInverted(_inverted_test);
-    // }
-    System.out.println("Shooter 1 Inverted? " + (shooterMotorA.getInverted() ? "True" : "False"));
-
+  public void setShooterPercentage(double shooterSpeed) {
     shooterMotorA.set(shooterSpeed);
+  }
+
+  public void setShooterRPM(int rpm) {
+    double outputInSensorUnits = rpm * Constants.Falcon500SensorUnitsConstant / 600.0;
+    shooterMotorA.set(TalonFXControlMode.Velocity, outputInSensorUnits);
   }
   
   @Override

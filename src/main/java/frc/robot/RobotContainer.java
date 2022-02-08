@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Drivebase;
 import frc.robot.subsystems.Indexer;
 import frc.robot.commands.SetDrivetrainSpeedCommand;
+import frc.robot.commands.SetShooterRPM;
 import frc.robot.commands.TurnOffIndexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.TurnOnIntake;
@@ -81,11 +82,11 @@ public class RobotContainer {
 //   .whenReleased(new TurnOffShooter(shooter));
   
   P0_leftBumper
-  .whenPressed(new LowGoalShooter(shooter))
+  .whenPressed(new SetShooterRPM(shooter, Constants.LowGoalRPM))
   .whenReleased(new TurnOffShooter(shooter));  
 
   P0_rightBumper
-    .whenPressed(new HighGoalShooter(shooter))
+    .whenPressed(new SetShooterRPM(shooter, Constants.HighGoalRPM))
     .whenReleased(new TurnOffShooter(shooter));
 
 

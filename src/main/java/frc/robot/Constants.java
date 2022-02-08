@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import frc.robot.lib.Gains;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -34,6 +36,16 @@ public final class Constants {
     public static int kIndexer = 4;
     public static int kShooterA = 2;
     public static int kShooterB = 13;
+
+    // Shooter PID
+    /* 	                                    			  kP   kI   kD   kF               Iz    PeakOut */
+    public static Gains kShooterPIDF  = new Gains( 0.1,   0,  5,  1023.0/20660.0,  300,  1.00);
+
+    public static double Falcon500SensorUnitsConstant = 2048;
+
+
+    public static int HighGoalRPM = 3600;
+    public static int LowGoalRPM = 1000;
 
     // true = arcade drive, false = tank drive
     public static boolean isCurvatureDrive = false;

@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
   public Intake() {
-    m_intakeMotor.configOpenloopRamp(0.5f);
+    m_intakeMotor.configOpenloopRamp(0.4f);
     m_intakeMotor.setInverted(true);
 
   }

@@ -28,7 +28,6 @@ public class Drivebase extends SubsystemBase {
     setLeftMasterDefaults();
     setrightSlaveDefaults();
     setleftSlaveDefaults();
-    System.out.println("Constructor");
   }
   
 
@@ -57,14 +56,14 @@ public class Drivebase extends SubsystemBase {
     private void setLeftMasterDefaults() {
       LeftMaster.configFactoryDefault();
       LeftMaster.setNeutralMode(NeutralMode.Coast);
-      LeftMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 55, 1.0));
+      LeftMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
       LeftMaster.configOpenloopRamp(.25);
     }
 
     private void setleftSlaveDefaults() {
       LeftSlave.configFactoryDefault();
       LeftSlave.setNeutralMode(NeutralMode.Coast);
-      LeftSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 55, 1.0));
+      LeftSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
       LeftSlave.configOpenloopRamp(.25);
       LeftSlave.follow(LeftMaster);
       //LeftSlave.setInverted(true);
@@ -73,7 +72,7 @@ public class Drivebase extends SubsystemBase {
     private void setRightMasterDefaults() {
       RightMaster.configFactoryDefault();
       RightMaster.setNeutralMode(NeutralMode.Coast);
-      RightMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 55, 1.0));
+      RightMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
       RightMaster.configOpenloopRamp(.25);
       RightMaster.setInverted(InvertType.InvertMotorOutput);
     }
@@ -81,7 +80,7 @@ public class Drivebase extends SubsystemBase {
     private void setrightSlaveDefaults() {
       RightSlave.configFactoryDefault();
       RightSlave.setNeutralMode(NeutralMode.Coast);
-      RightSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 55, 1.0));
+      RightSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
       RightSlave.configOpenloopRamp(.25);
       RightSlave.follow(RightMaster);
       RightSlave.setInverted(InvertType.InvertMotorOutput);

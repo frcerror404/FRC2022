@@ -44,8 +44,10 @@ public final class Constants {
     public static double Falcon500SensorUnitsConstant = 2048;
 
 
-    public static int HighGoalRPM = 3600;
+    public static int HighGoalRPM = 3350;
     public static int LowGoalRPM = 1000;
+    
+    public static double kDrivetrainLowSpeedMultiplier = .6;
 
     // true = arcade drive, false = tank drive
     public static boolean isCurvatureDrive = false;

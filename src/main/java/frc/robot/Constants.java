@@ -39,12 +39,12 @@ public final class Constants {
 
     // Shooter PID
     /* 	                                    			  kP   kI   kD   kF               Iz    PeakOut */
-    public static Gains kShooterPIDF  = new Gains( 0.1,   0,  5,  1023.0/20660.0,  300,  1.00);
+    public static Gains kShooterPIDF  = new Gains( 0.1,   0,  5,  1023.0    /20660.0,  300,  1.00);
 
     public static double Falcon500SensorUnitsConstant = 2048;
 
 
-    public static int HighGoalRPM = 3350;
+    public static int HighGoalRPM = 3425;
     public static int LowGoalRPM = 1000;
     
     public static double kDrivetrainLowSpeedMultiplier = .6;

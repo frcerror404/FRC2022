@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.I2C.Port;
 
@@ -59,13 +60,13 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton P0_rightBumper = new JoystickButton(joy0, XboxController.Button.kRightBumper.value);
-  
-    JoystickButton P0_AButton = new JoystickButton(joy0, XboxController.Button.kA.value);
-    JoystickButton P0_BButton = new JoystickButton(joy0, XboxController.Button.kB.value);
-    JoystickButton P0_leftBumper = new JoystickButton(joy0, XboxController.Button.kLeftBumper.value);
+    JoystickButton P0_BButton = new JoystickButton(joy0, XboxController.Button.kA.value);
 
+    JoystickButton P1_leftBumper = new JoystickButton(joy1, XboxController.Button.kLeftBumper.value);
+    JoystickButton P1_rightBumper = new JoystickButton(joy1, XboxController.Button.kRightBumper.value);
+    JoystickButton P1_BButton = new JoystickButton(joy1, XboxController.Button.kB.value);
     JoystickButton P1_AButton = new JoystickButton(joy1, XboxController.Button.kA.value);
+//    JoystickButton P1_XButton = new JoystickButton(joy1, XboxController.Button.kX.value);
 
     /**
      * Press Start and Back on both controllers to reset
@@ -77,24 +78,23 @@ public class RobotContainer {
     // .whileActiveContinuous(new RewindWinch(m_climber));
 
     
-//  P0_leftBumper
-//    .whenPressed(new TurnOnShooter(shooter))
+//  P1_XButton
+//   .whenPressed(new TurnOnShooter(shooter))
 //   .whenReleased(new TurnOffShooter(shooter));
   
-  P0_leftBumper
-  .whenPressed(new SetShooterRPM(shooter, Constants.LowGoalRPM))
-  .whenReleased(new TurnOffShooter(shooter));  
+  P1_leftBumper
+   .whenPressed(new SetShooterRPM(shooter, Constants.LowGoalRPM))
+   .whenReleased(new TurnOffShooter(shooter));  
 
-  P0_rightBumper
+  P1_rightBumper
     .whenPressed(new SetShooterRPM(shooter, Constants.HighGoalRPM))
     .whenReleased(new TurnOffShooter(shooter));
 
-
-  P0_AButton
+  P1_BButton
     .whenPressed(new TurnOnIndexer(indexer))
     .whenReleased(new TurnOffIndexer(indexer));
 
-    P1_AButton
+  P1_AButton
     .whenPressed(new TurnOnIntake(intake))
     .whenReleased(new TurnOffIntake(intake));
     

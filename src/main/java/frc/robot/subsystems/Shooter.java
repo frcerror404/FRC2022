@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -23,8 +22,8 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new shooter.
    */
-  private final WPI_TalonFX shooterMotorA = new WPI_TalonFX(Constants.kShooterA);
-  private final WPI_TalonFX shooterMotorB = new WPI_TalonFX(Constants.kShooterB);
+  private final WPI_TalonFX shooterA = new WPI_TalonFX(Constants.kShooterA);
+  private final WPI_TalonFX shooterB = new WPI_TalonFX(Constants.kShooterB);
 
   private TalonFXConfiguration aConfiguration = new TalonFXConfiguration();
 
@@ -37,23 +36,23 @@ public class Shooter extends SubsystemBase {
     aConfiguration.slot0.kF = Constants.kShooterPIDF.kF;
     aConfiguration.primaryPID.selectedFeedbackSensor = TalonFXFeedbackDevice.IntegratedSensor.toFeedbackDevice();
 
-    shooterMotorA.setInverted(true);
-    shooterMotorB.follow(shooterMotorA);
-    shooterMotorB.setInverted(TalonFXInvertType.OpposeMaster);
+    shooterA.setInverted(true);
+    shooterB.follow(shooterA);
+    shooterB.setInverted(TalonFXInvertType.OpposeMaster);
 
-    shooterMotorA.configAllSettings(aConfiguration);
+    shooterA.configAllSettings(aConfiguration);
   }
   
   /**
    * @param ShooterSpeed the speed 0-1
    */
   public void setShooterPercentage(double shooterSpeed) {
-    shooterMotorA.set(shooterSpeed);
+    shooterA.set(shooterSpeed);
   }
 
   public void setShooterRPM(int rpm) {
     double outputInSensorUnits = rpm * Constants.Falcon500SensorUnitsConstant / 600.0;
-    shooterMotorA.set(TalonFXControlMode.Velocity, outputInSensorUnits);
+    shooterA.set(TalonFXControlMode.Velocity, outputInSensorUnits);
   }
   
   @Override

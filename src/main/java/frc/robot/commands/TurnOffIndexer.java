@@ -5,16 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.IndexerTalon;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TurnOffIndexer extends InstantCommand {
-  private final Indexer m_indexer;
+  private final IndexerTalon m_indexer;
   
-  public TurnOffIndexer(Indexer indexer) {
+  public TurnOffIndexer(IndexerTalon indexer) {
     addRequirements(indexer);
     m_indexer = indexer;
   }

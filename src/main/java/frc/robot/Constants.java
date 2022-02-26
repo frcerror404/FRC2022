@@ -33,9 +33,11 @@ public final class Constants {
 
     // Module ID's
     public static int kFrontIntake = 5;
-    public static int kIndexer = 4;
+    public static int kClimber = 4;
     public static int kShooterA = 2;
     public static int kShooterB = 13;
+    public static int kClimberA = 14;
+    public static int kClimberB = 15;
 
     // Shooter PID
     /* 	                                    			  kP   kI   kD   kF               Iz    PeakOut */
@@ -44,8 +46,8 @@ public final class Constants {
     public static double Falcon500SensorUnitsConstant = 2048;
 
 
-    public static int HighGoalRPM = 3425;
-    public static int LowGoalRPM = 1000;
+    public static int HighGoalRPM = 3475;
+    public static int LowGoalRPM = 1050;
     
     public static double kDrivetrainLowSpeedMultiplier = .6;
 

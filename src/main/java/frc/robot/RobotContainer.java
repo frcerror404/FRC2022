@@ -13,19 +13,23 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Drivebase;
-import frc.robot.subsystems.Indexer;
-import frc.robot.commands.SetDrivetrainSpeedCommand;
-import frc.robot.commands.SetShooterRPM;
-import frc.robot.commands.TurnOffIndexer;
+// import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.IndexerTalon;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
+import frc.robot.commands.SetDrivetrainSpeedCommand;
 import frc.robot.commands.TurnOnIntake;
 import frc.robot.commands.TurnOffIntake;
-import frc.robot.subsystems.Shooter;
 import frc.robot.commands.TurnOnShooter;
+import frc.robot.commands.TurnOffShooter;
 import frc.robot.commands.HighGoalShooter;
 import frc.robot.commands.LowGoalShooter;
-import frc.robot.commands.TurnOffShooter;
+import frc.robot.commands.SetShooterRPM;
 import frc.robot.commands.TurnOnIndexer;
+import frc.robot.commands.TurnOffIndexer;
+import frc.robot.commands.TurnOnClimber;
+import frc.robot.commands.TurnOffClimber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -38,7 +42,8 @@ public class RobotContainer {
   public final Drivebase drivebase;
   public final Intake intake = new Intake();
   public final Shooter shooter = new Shooter();
-  public final Indexer indexer = new Indexer();
+  public final IndexerTalon indexer = new IndexerTalon();
+  public final Climber climber = new Climber();
  
   private final XboxController joy0 = new XboxController(0);
   private final XboxController joy1 = new XboxController(1);
@@ -61,12 +66,14 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton P0_BButton = new JoystickButton(joy0, XboxController.Button.kA.value);
+    JoystickButton P0_LStickClick = new JoystickButton(joy0, XboxController.Button.kLeftStick.value);
+    JoystickButton P0_RStickClick = new JoystickButton(joy0, XboxController.Button.kRightStick.value);
 
     JoystickButton P1_leftBumper = new JoystickButton(joy1, XboxController.Button.kLeftBumper.value);
     JoystickButton P1_rightBumper = new JoystickButton(joy1, XboxController.Button.kRightBumper.value);
     JoystickButton P1_BButton = new JoystickButton(joy1, XboxController.Button.kB.value);
     JoystickButton P1_AButton = new JoystickButton(joy1, XboxController.Button.kA.value);
-//    JoystickButton P1_XButton = new JoystickButton(joy1, XboxController.Button.kX.value);
+    JoystickButton P1_XButton = new JoystickButton(joy1, XboxController.Button.kX.value);
 
     /**
      * Press Start and Back on both controllers to reset
@@ -97,6 +104,10 @@ public class RobotContainer {
   P1_AButton
     .whenPressed(new TurnOnIntake(intake))
     .whenReleased(new TurnOffIntake(intake));
+
+  P1_XButton
+    .whenPressed(new TurnOnClimber(climber))
+    .whenReleased(new TurnOffClimber(climber));
     
     if(Constants.isCurvatureDrive) {
       drivebase.setDefaultCommand(

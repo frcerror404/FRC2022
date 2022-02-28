@@ -9,7 +9,7 @@ import frc.robot.Constants;
 
 public class IndexerTalon  extends SubsystemBase {
     
-    private final WPI_TalonSRX IndexerTalon = new WPI_TalonSRX(Constants.kClimber);
+    private final WPI_TalonSRX IndexerTalon = new WPI_TalonSRX(Constants.KIntakeWinch);
 
     public IndexerTalon() {
 

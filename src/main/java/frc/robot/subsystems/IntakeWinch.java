@@ -6,15 +6,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
-public class Indexer extends SubsystemBase {
+public class IntakeWinch extends SubsystemBase {
     
-    private final WPI_TalonSRX Indexer = new WPI_TalonSRX(Constants.KIntakeWinch);
+    private final WPI_TalonSRX Winch = new WPI_TalonSRX(Constants.KIntakeWinch);
 
-    public Indexer() {
+    public IntakeWinch() {
 
     }
 
-    public void setIndexerSpeed(double indexerSpeed) {
-        Indexer.set(indexerSpeed);
+    public void setWinchSpeed(double WinchSpeed) {
+        Winch.set(WinchSpeed);
     }
 }

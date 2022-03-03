@@ -17,6 +17,7 @@ public final class Constants {
     // Module ID's
     public static int kFrontIntake = 7;
     public static int KIntakeWinch = 9;
+    public static int kIndexer = 4;
     public static int kShooterA = 2;
     public static int kShooterB = 13;
     public static int kClimberFL = 10;

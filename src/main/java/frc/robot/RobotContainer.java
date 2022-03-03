@@ -15,6 +15,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Drivebase;
 import frc.robot.subsystems.FrontClimber;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.BackClimber;
 // import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.IndexerTalon;
@@ -47,7 +48,7 @@ public class RobotContainer {
   public final Intake intake = new Intake();
   public final IntakeWinch winch = new IntakeWinch();
   public final Shooter shooter = new Shooter();
-  public final IndexerTalon indexer = new IndexerTalon();
+  public final Indexer indexer = new Indexer();
   public final FrontClimber Fclimber = new FrontClimber();
   public final BackClimber Bclimber = new BackClimber();
  
@@ -84,6 +85,8 @@ public class RobotContainer {
     JoystickButton P1_AButton = new JoystickButton(joy1, XboxController.Button.kA.value);
     JoystickButton P1_XButton = new JoystickButton(joy1, XboxController.Button.kX.value);
     JoystickButton P1_YButton = new JoystickButton(joy1, XboxController.Button.kY.value);
+    JoystickButton P1_RStickClick = new JoystickButton(joy1, XboxController.Button.kRightStick.value);
+    JoystickButton P1_LStickClick = new JoystickButton(joy1, XboxController.Button.kLeftStick.value);
   
   P1_leftBumper
    .whenPressed(new SetShooterRPM(shooter, Constants.LowGoalRPM))
@@ -97,16 +100,16 @@ public class RobotContainer {
     .whenPressed(new TurnOnIndexer(indexer))
     .whenReleased(new TurnOffIndexer(indexer));
 
-  P1_AButton
-    .whenPressed(new TurnOnIntake(intake))
-    .whenReleased(new TurnOffIntake(intake));
+  //P1_AButton
+    //.whenPressed(new TurnOnIntake(intake))
+    //.whenReleased(new TurnOffIntake(intake));
 
-  P1_YButton
-    .whenPressed(new SetIntakeWinchSpeed(winch, 0.65))
-    .whenReleased(new SetIntakeWinchSpeed(winch, 0.0));
+  //P1_RStickClick
+    //.whenPressed(new SetIntakeWinchSpeed(winch, 0.175))
+    //.whenReleased(new SetIntakeWinchSpeed(winch, 0.0));
   
-  P1_XButton
-    .whenPressed(new SetIntakeWinchSpeed(winch, -0.65))
+  P1_LStickClick
+    .whenPressed(new SetIntakeWinchSpeed(winch, -0.175))
     .whenReleased(new SetIntakeWinchSpeed(winch, 0.0));
 
   P0_YButton

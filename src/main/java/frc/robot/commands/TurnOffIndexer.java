@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.IndexerTalon;
 
 
@@ -12,9 +13,9 @@ import frc.robot.subsystems.IndexerTalon;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TurnOffIndexer extends InstantCommand {
-  private final IndexerTalon m_indexer;
+  private final Indexer m_indexer;
   
-  public TurnOffIndexer(IndexerTalon indexer) {
+  public TurnOffIndexer(Indexer indexer) {
     addRequirements(indexer);
     m_indexer = indexer;
   }

@@ -8,7 +8,7 @@ import frc.robot.Constants;
 
 public class Indexer extends SubsystemBase {
     
-    private final WPI_TalonSRX Indexer = new WPI_TalonSRX(Constants.KIntakeWinch);
+    private final WPI_TalonSRX Indexer = new WPI_TalonSRX(Constants.kIndexer);
 
     public Indexer() {
 

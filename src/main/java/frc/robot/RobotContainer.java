@@ -120,13 +120,13 @@ public class RobotContainer {
     .whenPressed(new SetFrontClimberSpeed(Fclimber, -0.65))
     .whenReleased(new SetFrontClimberSpeed(Fclimber, 0.0));
 
-  P0_AButton
-    .whenPressed(new SetBackClimberSpeed(Bclimber, 0.85))
-    .whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
+  //P0_AButton
+    //.whenPressed(new SetBackClimberSpeed(Bclimber, 0.85))
+    //.whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
 
-  P0_XButton
-    .whenPressed(new SetBackClimberSpeed(Bclimber, -.65))
-    .whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
+  //P0_XButton
+    //.whenPressed(new SetBackClimberSpeed(Bclimber, -.65))
+    //.whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
 
     
     if(Constants.isCurvatureDrive) {

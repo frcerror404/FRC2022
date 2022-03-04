@@ -6,8 +6,8 @@ import frc.robot.Constants;
 
 
 public class Climber extends SubsystemBase {
-    private final WPI_TalonFX ClimberA = new WPI_TalonFX(Constants.kClimberA);
-    private final WPI_TalonFX ClimberB = new WPI_TalonFX(Constants.kClimberB);
+    private final WPI_TalonFX ClimberA = new WPI_TalonFX(Constants.kClimberFL);
+    private final WPI_TalonFX ClimberB = new WPI_TalonFX(Constants.kClimberFR);
 
 
     public Climber() {

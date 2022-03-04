@@ -21,6 +21,6 @@ public class TurnOnIntake extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intake.setIntakeSpeed(.3);
+    m_intake.setIntakeSpeed(.30);
   }
 }

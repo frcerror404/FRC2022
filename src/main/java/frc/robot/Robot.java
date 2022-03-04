@@ -6,15 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.subsystems.Drivebase;
 import frc.robot.commands.Autonomous.Commands.SetDrivetrainSpeedForTime;
 import frc.robot.commands.Autonomous.Modes.DriveStraightAuton;
-import frc.robot.commands.Autonomous.Modes.NoOpAuton;
-import frc.robot.commands.Autonomous.Modes.OneBallAuton;
+//import frc.robot.commands.Autonomous.Modes.NoOpAuton;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,6 +26,7 @@ public class Robot extends TimedRobot {
   public final Drivebase drivebase = new Drivebase();
 
   private RobotContainer m_robotContainer;
+  private SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -35,14 +34,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer(drivebase);
-    
-
+    new RobotContainer(drivebase);
   }
 
+  /**
+   * This function is called every robot packet, no matter the mode. Use this for items like
+   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
+   *
+   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
+   * SmartDashboard integrated updating.
+   */
   @Override
   public void robotPeriodic() {
-
+    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
+    // commands, running already-scheduled commands, removing finished or interrupted commands,
+    // and running subsystem periodic() methods.  This must be called from the robot's periodic
+    // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
 
@@ -56,7 +63,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //SetDrivetrainSpeedForTime(leftSpeed, rightSpeed, duration, drivebase, Turn1Left, Turn1LeftDistance, Turn1Right, Turn1RightDistance)
+    m_autonomousCommand = new SetDrivetrainSpeedForTime(.5, .5, 2.0, drivebase);
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

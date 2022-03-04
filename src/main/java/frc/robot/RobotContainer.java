@@ -9,9 +9,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.simulation.JoystickSim;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Drivebase;
 import frc.robot.subsystems.FrontClimber;
@@ -28,6 +31,10 @@ import frc.robot.commands.SetIntakeWinchSpeed;
 import frc.robot.commands.TurnOnIntake;
 import frc.robot.commands.TurnOffIntake;
 import frc.robot.commands.TurnOnShooter;
+import frc.robot.commands.Autonomous.Modes.NoOpAuton;
+import frc.robot.commands.Autonomous.Modes.OneBallAuton;
+import frc.robot.commands.Autonomous.Modes.TwoBallAuton;
+import frc.robot.commands.Autonomous.Modes.TwoBallShortAuton;
 import frc.robot.commands.TurnOffShooter;
 import frc.robot.commands.HighGoalShooter;
 import frc.robot.commands.LowGoalShooter;
@@ -55,14 +62,24 @@ public class RobotContainer {
   private final XboxController joy0 = new XboxController(0);
   private final XboxController joy1 = new XboxController(1);
 
-  //public final AHRS navx = new AHRS(Port.kMXP);
-  //public final Limelight limelight = new Limelight();
+  
+  private SendableChooser<Command> m_chooser = new SendableChooser<Command>();
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  
   public RobotContainer(Drivebase drivebase) {
     this.drivebase = drivebase;
     // Configure the button bindings
     configureButtonBindings();
+
+    m_chooser.addOption("Disable Auton", new NoOpAuton());
+    m_chooser.addOption("One Ball Auton", new OneBallAuton(drivebase, shooter, indexer));
+    m_chooser.setDefaultOption("Two Ball Auton", new TwoBallAuton(drivebase, shooter, indexer, intake));
+    m_chooser.addOption("Two Ball Short Auton", new TwoBallShortAuton(drivebase, shooter, indexer, intake));
+    SmartDashboard.putData(m_chooser);
+  }
+
+  public Command getAutonomousCommand() {
+    return m_chooser.getSelected();
   }
 
   /**
@@ -146,14 +163,5 @@ public class RobotContainer {
         drivebase));
   
     }
-    
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  //public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    //return m_autoCommand;
   }
 }

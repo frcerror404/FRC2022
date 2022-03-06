@@ -13,6 +13,7 @@ import frc.robot.commands.TurnOffShooter;
 import frc.robot.commands.TurnOnIndexer;
 import frc.robot.commands.TurnOnIntake;
 import frc.robot.commands.Autonomous.Commands.DelayCommand;
+import frc.robot.commands.Autonomous.Commands.ReverseIntake;
 import frc.robot.commands.Autonomous.Commands.SetDrivetrainSpeedForTime;
 import frc.robot.subsystems.Drivebase;
 import frc.robot.subsystems.Indexer;
@@ -32,13 +33,14 @@ public class TwoBallShortAuton extends SequentialCommandGroup {
       new DelayCommand(.5),
       //new TurnOffShooter(shooter),
       new TurnOffIndexer(indexer),
-      new TurnOnIntake(intake),
+      new ReverseIntake(intake),
       new SetDrivetrainSpeedForTime(-.6, -.6, .35, drivebase),
       new SetDrivetrainSpeedForTime(.5, .5, .2, drivebase),
+      new TurnOnIntake(intake),
       new SetDrivetrainSpeedForTime(-.4, -.4, 1.75, drivebase),
       new SetDrivetrainSpeedForTime(.6, .6, .4, drivebase),
       new TurnOnIndexer(indexer),
-      new DelayCommand(2),
+      new DelayCommand(6),
       new TurnOffShooter(shooter),
       new TurnOffIndexer(indexer),
       new TurnOffIntake(intake)

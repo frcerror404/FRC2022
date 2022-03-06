@@ -31,6 +31,7 @@ import frc.robot.commands.SetIntakeWinchSpeed;
 import frc.robot.commands.TurnOnIntake;
 import frc.robot.commands.TurnOffIntake;
 import frc.robot.commands.TurnOnShooter;
+import frc.robot.commands.Autonomous.Commands.ReverseIntake;
 import frc.robot.commands.Autonomous.Modes.NoOpAuton;
 import frc.robot.commands.Autonomous.Modes.OneBallAuton;
 import frc.robot.commands.Autonomous.Modes.TwoBallAuton;
@@ -119,6 +120,10 @@ public class RobotContainer {
 
   P1_AButton
     .whenPressed(new TurnOnIntake(intake))
+    .whenReleased(new TurnOffIntake(intake));
+
+  P1_YButton
+    .whenPressed(new ReverseIntake(intake))
     .whenReleased(new TurnOffIntake(intake));
 
   //P1_RStickClick

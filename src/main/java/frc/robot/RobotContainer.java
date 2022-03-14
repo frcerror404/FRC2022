@@ -24,10 +24,12 @@ import frc.robot.subsystems.BackClimber;
 import frc.robot.subsystems.IndexerTalon;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeWinch;
+import frc.robot.subsystems.MartianClimbers;
 import frc.robot.subsystems.Shooter;
 import frc.robot.commands.SetDrivetrainSpeedCommand;
 import frc.robot.commands.SetFrontClimberSpeed;
 import frc.robot.commands.SetIntakeWinchSpeed;
+import frc.robot.commands.SetRelease;
 import frc.robot.commands.TurnOnIntake;
 import frc.robot.commands.TurnOffIntake;
 import frc.robot.commands.TurnOnShooter;
@@ -36,6 +38,7 @@ import frc.robot.commands.Autonomous.Modes.NoOpAuton;
 import frc.robot.commands.Autonomous.Modes.OneBallAuton;
 import frc.robot.commands.Autonomous.Modes.TwoBallAuton;
 import frc.robot.commands.Autonomous.Modes.TwoBallShortAuton;
+import frc.robot.lib.ReleaseType;
 import frc.robot.commands.TurnOffShooter;
 import frc.robot.commands.HighGoalShooter;
 import frc.robot.commands.LowGoalShooter;
@@ -57,8 +60,9 @@ public class RobotContainer {
   public final IntakeWinch winch = new IntakeWinch();
   public final Shooter shooter = new Shooter();
   public final Indexer indexer = new Indexer();
-  public final FrontClimber Fclimber = new FrontClimber();
-  public final BackClimber Bclimber = new BackClimber();
+  //public final FrontClimber Fclimber = new FrontClimber();
+  //public final BackClimber Bclimber = new BackClimber();
+  public final MartianClimbers martianClimbers = new MartianClimbers();
  
   private final XboxController joy0 = new XboxController(0);
   private final XboxController joy1 = new XboxController(1);
@@ -95,7 +99,8 @@ public class RobotContainer {
     JoystickButton P0_AButton = new JoystickButton(joy0, XboxController.Button.kA.value);
     JoystickButton P0_XButton = new JoystickButton(joy0, XboxController.Button.kX.value);
     JoystickButton P0_YButton = new JoystickButton(joy0, XboxController.Button.kY.value);
-
+    JoystickButton P0_LStick = new JoystickButton(joy0, XboxController.Button.kLeftStick.value);
+    JoystickButton P0_RStick = new JoystickButton(joy0, XboxController.Button.kRightStick.value);
 
     JoystickButton P1_leftBumper = new JoystickButton(joy1, XboxController.Button.kLeftBumper.value);
     JoystickButton P1_rightBumper = new JoystickButton(joy1, XboxController.Button.kRightBumper.value);
@@ -134,13 +139,13 @@ public class RobotContainer {
     .whenPressed(new SetIntakeWinchSpeed(winch, -0.175))
     .whenReleased(new SetIntakeWinchSpeed(winch, 0.0));
 
-  P0_YButton
-    .whenPressed(new SetFrontClimberSpeed(Fclimber, 1.0))
-    .whenReleased(new SetFrontClimberSpeed(Fclimber, 0.0));
+  // P0_YButton
+  //   .whenPressed(new SetFrontClimberSpeed(Fclimber, 1.0))
+  //   .whenReleased(new SetFrontClimberSpeed(Fclimber, 0.0));
 
-  P0_BButton
-    .whenPressed(new SetFrontClimberSpeed(Fclimber, -0.65))
-    .whenReleased(new SetFrontClimberSpeed(Fclimber, 0.0));
+  // P0_BButton
+  //   .whenPressed(new SetFrontClimberSpeed(Fclimber, -0.65))
+  //   .whenReleased(new SetFrontClimberSpeed(Fclimber, 0.0));
 
   // P0_AButton
   //   .whenPressed(new SetBackClimberSpeed(Bclimber, 0.85))
@@ -149,6 +154,15 @@ public class RobotContainer {
   // P0_XButton
   //   .whenPressed(new SetBackClimberSpeed(Bclimber, -.65))
   //   .whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
+
+
+  P0_LStick
+    .whenPressed(new SetRelease(martianClimbers, ReleaseType.LongArmRelease))
+    .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
+
+  P0_RStick
+    .whenPressed(new SetRelease(martianClimbers, ReleaseType.ShortArmRelease))
+    .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
 
     
     if(Constants.isCurvatureDrive) {

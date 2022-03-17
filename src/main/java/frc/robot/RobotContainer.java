@@ -62,7 +62,8 @@ public class RobotContainer {
   public final Indexer indexer = new Indexer();
   //public final FrontClimber Fclimber = new FrontClimber();
   //public final BackClimber Bclimber = new BackClimber();
-  public final MartianClimbers martianClimbers = new MartianClimbers();
+
+  //public final MartianClimbers martianClimbers = new MartianClimbers();
  
   private final XboxController joy0 = new XboxController(0);
   private final XboxController joy1 = new XboxController(1);
@@ -156,13 +157,13 @@ public class RobotContainer {
   //   .whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
 
 
-  P0_LStick
-    .whenPressed(new SetRelease(martianClimbers, ReleaseType.LongArmRelease))
-    .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
+  // P0_LStick
+  //     .whenPressed(new SetRelease(martianClimbers, ReleaseType.LongArmRelease))
+  //     .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
 
-  P0_RStick
-    .whenPressed(new SetRelease(martianClimbers, ReleaseType.ShortArmRelease))
-    .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
+  // P0_RStick
+  //     .whenPressed(new SetRelease(martianClimbers, ReleaseType.ShortArmRelease))
+  //     .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
 
     
     if(Constants.isCurvatureDrive) {

@@ -24,6 +24,7 @@ public class Shooter extends SubsystemBase {
    */
   private final WPI_TalonFX shooterA = new WPI_TalonFX(Constants.kShooterA);
   private final WPI_TalonFX shooterB = new WPI_TalonFX(Constants.kShooterB);
+  private final WPI_TalonFX topShooter = new WPI_TalonFX(Constants.kTopShooter);
 
   private TalonFXConfiguration aConfiguration = new TalonFXConfiguration();
 
@@ -41,6 +42,8 @@ public class Shooter extends SubsystemBase {
     shooterB.setInverted(TalonFXInvertType.OpposeMaster);
 
     shooterA.configAllSettings(aConfiguration);
+
+    topShooter.configAllSettings(aConfiguration);
   }
   
   /**
@@ -48,11 +51,24 @@ public class Shooter extends SubsystemBase {
    */
   public void setShooterPercentage(double shooterSpeed) {
     shooterA.set(shooterSpeed);
+    topShooter.set(shooterSpeed);
   }
 
   public void setShooterRPM(int rpm) {
     double outputInSensorUnits = rpm * Constants.Falcon500SensorUnitsConstant / 600.0;
+    double topOutput = calculateTopShooterSpeed(rpm) * Constants.Falcon500SensorUnitsConstant / 600.0;
+    topOutput = topOutput * Constants.TopShooterMultiplier;
+    
     shooterA.set(TalonFXControlMode.Velocity, outputInSensorUnits);
+    topShooter.set(TalonFXControlMode.Velocity, topOutput);
+  }
+
+  private double calculateTopShooterSpeed(int mainShooterRPM) {
+    if(mainShooterRPM == 0) { return 0.0; }
+
+    double mainWheelSFM = 0.262 * Constants.MAIN_SHOOTER_WHEEL_DIAMETER * mainShooterRPM;
+    double topWheelRPM = mainWheelSFM / .262 / Constants.TOP_SHOOTER_WHEEL_DIAMETER;
+    return topWheelRPM;
   }
   
   @Override

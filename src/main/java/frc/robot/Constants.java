@@ -37,8 +37,8 @@ public final class Constants {
     // Shooter PID
     /* 	                                    			  kP   kI   kD   kF               Iz    PeakOut */
     public static Gains kShooterPIDF  = new Gains( 0.1,   0,  5,  1023.0    /20660.0,  300,  1.00);
-    public static int HighGoalRPM = 1700;
-    public static int LowGoalRPM = 1000;
+    public static int HighGoalRPM = 1850;
+    public static int LowGoalRPM = 800;
 
     // Climber Release PID
     public static Gains kReleasePIDF = new Gains( 0.2,    0,   .004,    0,  0,  1.00);

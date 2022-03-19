@@ -52,38 +52,49 @@ public class Drivebase extends SubsystemBase {
     
   }
 
-    // Reset Motor Controllers and set Limits/Ramp Rate
-    private void setLeftMasterDefaults() {
-      LeftMaster.configFactoryDefault();
-      LeftMaster.setNeutralMode(NeutralMode.Coast);
-      LeftMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
-      LeftMaster.configOpenloopRamp(.25);
-    }
+  // Reset Motor Controllers and set Limits/Ramp Rate
+  private void setLeftMasterDefaults() {
+    LeftMaster.configFactoryDefault();
+    LeftMaster.setNeutralMode(NeutralMode.Coast);
+    LeftMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
+    LeftMaster.configOpenloopRamp(.25);
+  }
 
-    private void setleftSlaveDefaults() {
-      LeftSlave.configFactoryDefault();
-      LeftSlave.setNeutralMode(NeutralMode.Coast);
-      LeftSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
-      LeftSlave.configOpenloopRamp(.25);
-      LeftSlave.follow(LeftMaster);
-      //LeftSlave.setInverted(true);
-    }
+  private void setleftSlaveDefaults() {
+    LeftSlave.configFactoryDefault();
+    LeftSlave.setNeutralMode(NeutralMode.Coast);
+    LeftSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
+    LeftSlave.configOpenloopRamp(.25);
+    LeftSlave.follow(LeftMaster);
+    //LeftSlave.setInverted(true);
+  }
 
-    private void setRightMasterDefaults() {
-      RightMaster.configFactoryDefault();
-      RightMaster.setNeutralMode(NeutralMode.Coast);
-      RightMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
-      RightMaster.configOpenloopRamp(.25);
-      RightMaster.setInverted(InvertType.InvertMotorOutput);
-    }
-   
-    private void setrightSlaveDefaults() {
-      RightSlave.configFactoryDefault();
-      RightSlave.setNeutralMode(NeutralMode.Coast);
-      RightSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
-      RightSlave.configOpenloopRamp(.25);
-      RightSlave.follow(RightMaster);
-      RightSlave.setInverted(InvertType.InvertMotorOutput);
+  private void setRightMasterDefaults() {
+    RightMaster.configFactoryDefault();
+    RightMaster.setNeutralMode(NeutralMode.Coast);
+    RightMaster.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
+    RightMaster.configOpenloopRamp(.25);
+    RightMaster.setInverted(InvertType.InvertMotorOutput);
+  }
+  
+  private void setrightSlaveDefaults() {
+    RightSlave.configFactoryDefault();
+    RightSlave.setNeutralMode(NeutralMode.Coast);
+    RightSlave.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(false, 50, 55, 1.0));
+    RightSlave.configOpenloopRamp(.25);
+    RightSlave.follow(RightMaster);
+    RightSlave.setInverted(InvertType.InvertMotorOutput);
 
   }
+
+  public void SetBrakeMode(boolean on) {
+    NeutralMode mode = on ? NeutralMode.Brake : NeutralMode.Coast;
+
+    RightMaster.setNeutralMode(mode);
+    LeftMaster.setNeutralMode(mode);
+    RightSlave.setNeutralMode(mode);
+    LeftSlave.setNeutralMode(mode);
+  }
+
+    
 }

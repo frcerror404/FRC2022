@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.simulation.JoystickSim;
@@ -34,6 +35,8 @@ import frc.robot.commands.TurnOnIntake;
 import frc.robot.commands.TurnOffIntake;
 import frc.robot.commands.TurnOnShooter;
 import frc.robot.commands.Autonomous.Commands.ReverseIntake;
+import frc.robot.commands.Autonomous.Commands.TurnInPlaceXDegrees;
+import frc.robot.commands.Autonomous.Modes.FourBallAuton;
 import frc.robot.commands.Autonomous.Modes.NoOpAuton;
 import frc.robot.commands.Autonomous.Modes.OneBallAuton;
 import frc.robot.commands.Autonomous.Modes.TwoBallAuton;
@@ -60,6 +63,7 @@ public class RobotContainer {
   public final IntakeWinch winch = new IntakeWinch();
   public final Shooter shooter = new Shooter();
   public final Indexer indexer = new Indexer();
+  public final AHRS imu = new AHRS(SPI.Port.kMXP);
   //public final FrontClimber Fclimber = new FrontClimber();
   //public final BackClimber Bclimber = new BackClimber();
 
@@ -81,6 +85,10 @@ public class RobotContainer {
     m_chooser.addOption("One Ball Auton", new OneBallAuton(drivebase, shooter, indexer));
     m_chooser.setDefaultOption("Two Ball Auton", new TwoBallAuton(drivebase, shooter, indexer, intake));
     m_chooser.addOption("Two Ball Short Auton", new TwoBallShortAuton(drivebase, shooter, indexer, intake));
+    m_chooser.addOption("Rotate 90", new FourBallAuton(drivebase, imu, 90, .6));
+    m_chooser.addOption("Rotate -30", new FourBallAuton(drivebase, imu, -30, .6));
+    m_chooser.addOption("Rotate 180", new FourBallAuton(drivebase, imu, 180, .6));
+
     SmartDashboard.putData(m_chooser);
   }
 

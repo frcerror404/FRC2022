@@ -30,6 +30,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.commands.SetDrivetrainSpeedCommand;
 import frc.robot.commands.SetFrontClimberSpeed;
 import frc.robot.commands.SetIntakeWinchSpeed;
+import frc.robot.commands.SetMartianClimberSpeed;
 import frc.robot.commands.SetRelease;
 import frc.robot.commands.TurnOnIntake;
 import frc.robot.commands.TurnOffIntake;
@@ -67,7 +68,7 @@ public class RobotContainer {
   //public final FrontClimber Fclimber = new FrontClimber();
   //public final BackClimber Bclimber = new BackClimber();
 
-  //public final MartianClimbers martianClimbers = new MartianClimbers();
+  public final MartianClimbers martianClimbers = new MartianClimbers();
  
   private final XboxController joy0 = new XboxController(0);
   private final XboxController joy1 = new XboxController(1);
@@ -85,9 +86,9 @@ public class RobotContainer {
     m_chooser.addOption("One Ball Auton", new OneBallAuton(drivebase, shooter, indexer));
     m_chooser.setDefaultOption("Two Ball Auton", new TwoBallAuton(drivebase, shooter, indexer, intake));
     m_chooser.addOption("Two Ball Short Auton", new TwoBallShortAuton(drivebase, shooter, indexer, intake));
-    m_chooser.addOption("Rotate 90", new FourBallAuton(drivebase, imu, 90, .6));
-    m_chooser.addOption("Rotate -30", new FourBallAuton(drivebase, imu, -30, .6));
-    m_chooser.addOption("Rotate 180", new FourBallAuton(drivebase, imu, 180, .6));
+    // m_chooser.addOption("Rotate 90", new FourBallAuton(drivebase, imu, 90, .6));
+    // m_chooser.addOption("Rotate -30", new FourBallAuton(drivebase, imu, -30, .6));
+    // m_chooser.addOption("Rotate 180", new FourBallAuton(drivebase, imu, 180, .6));
 
     SmartDashboard.putData(m_chooser);
   }
@@ -140,9 +141,9 @@ public class RobotContainer {
     .whenPressed(new ReverseIntake(intake))
     .whenReleased(new TurnOffIntake(intake));
 
-  //P1_RStickClick
-    //.whenPressed(new SetIntakeWinchSpeed(winch, 0.175))
-    //.whenReleased(new SetIntakeWinchSpeed(winch, 0.0));
+  P1_RStickClick
+    .whenPressed(new SetIntakeWinchSpeed(winch, 0.175))
+    .whenReleased(new SetIntakeWinchSpeed(winch, 0.0));
   
   P1_LStickClick
     .whenPressed(new SetIntakeWinchSpeed(winch, -0.175))
@@ -156,22 +157,22 @@ public class RobotContainer {
   //   .whenPressed(new SetFrontClimberSpeed(Fclimber, -0.65))
   //   .whenReleased(new SetFrontClimberSpeed(Fclimber, 0.0));
 
-  // P0_AButton
-  //   .whenPressed(new SetBackClimberSpeed(Bclimber, 0.85))
-  //   .whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
+  P0_AButton
+    .whenPressed(new SetMartianClimberSpeed(martianClimbers, -0.5))
+    .whenReleased(new SetMartianClimberSpeed(martianClimbers, 0.0));
 
-  // P0_XButton
-  //   .whenPressed(new SetBackClimberSpeed(Bclimber, -.65))
-  //   .whenReleased(new SetBackClimberSpeed(Bclimber, 0.0));
+  P0_YButton
+    .whenPressed(new SetMartianClimberSpeed(martianClimbers, 0.5))
+    .whenReleased(new SetMartianClimberSpeed(martianClimbers, 0.0));
 
 
-  // P0_LStick
-  //     .whenPressed(new SetRelease(martianClimbers, ReleaseType.LongArmRelease))
-  //     .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
+  P0_RStick
+      .whenPressed(new SetRelease(martianClimbers, ReleaseType.LongArmRelease))
+      .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
 
-  // P0_RStick
-  //     .whenPressed(new SetRelease(martianClimbers, ReleaseType.ShortArmRelease))
-  //     .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
+  P0_LStick
+      .whenPressed(new SetRelease(martianClimbers, ReleaseType.ShortArmRelease))
+      .whenReleased(new SetRelease(martianClimbers, ReleaseType.None));
 
     
     if(Constants.isCurvatureDrive) {

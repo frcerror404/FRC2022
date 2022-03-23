@@ -16,7 +16,7 @@ public final class Constants {
 
     // Module ID's
     public static int kFrontIntake = 7;
-    public static int KIntakeWinch = 9;
+    public static int KIntakeWinch = 10;
     public static int kIndexer = 4;
     public static int kShooterA = 2;
     public static int kShooterB = 13;
@@ -25,9 +25,9 @@ public final class Constants {
     public static int kClimberFR = 6; // Deprecated
     public static int kClimberBL = 11; // Deprecated
     public static int kClimberBR = 5; // Deprecated
-    public static int kSwingR = 10;
-    public static int kSwingL = 6;
-    public static int kRelease = 5;
+    public static int kSwingR = 3;
+    public static int kSwingL = 12;
+    public static int kRelease = 9;
 
     public static double MAIN_SHOOTER_WHEEL_DIAMETER = 4.0;
     public static double TOP_SHOOTER_WHEEL_DIAMETER = 2.25;
@@ -42,9 +42,9 @@ public final class Constants {
 
     // Climber Release PID
     public static Gains kReleasePIDF = new Gains( 0.2,    0,   .004,    0,  0,  1.00);
-    public static int kShortArmReleaseSetpoint = -300;
-    public static int kLongArmReleaseSetPoint = 3234;
-    public static int kNoRelease = 1705;
+    public static int kShortArmReleaseSetpoint = 1297;
+    public static int kLongArmReleaseSetPoint = 516;
+    public static int kNoRelease = 2033;
 
     public static double Falcon500SensorUnitsConstant = 2048;
 

@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.revrobotics.CANPIDController.AccelStrategy;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.lib.ReleaseType;
@@ -28,8 +29,10 @@ public class MartianClimbers extends SubsystemBase {
   public ReleaseType CurrentReleaseType = ReleaseType.None;
   /** Creates a new MartianClimbers. */
   public MartianClimbers() {
-    SwingL.follow(SwingR);
-    SwingL.setInverted(InvertType.OpposeMaster);
+    SwingL.configOpenloopRamp(.25);
+    SwingR.configOpenloopRamp(.25);
+    SwingR.follow(SwingL);
+    SwingR.setInverted(InvertType.OpposeMaster);
 
     
 
@@ -50,6 +53,20 @@ public class MartianClimbers extends SubsystemBase {
 
   }
 
+  public void SetReleaseByPercentage(ReleaseType releaseType) {
+    switch(releaseType) {
+      case LongArmRelease:
+        ReleaseMotor.set(TalonFXControlMode.PercentOutput, .50);
+        break;
+      case ShortArmRelease: 
+        ReleaseMotor.set(TalonFXControlMode.PercentOutput, -.50);
+        break;
+      case None:
+      default:
+        ReleaseMotor.set(TalonFXControlMode.PercentOutput, 0);
+    }
+  }
+
   public void SetRelease(ReleaseType releaseType) {
     CurrentReleaseType = releaseType;
 
@@ -67,10 +84,14 @@ public class MartianClimbers extends SubsystemBase {
 
     System.out.println("Climber Release: " + releaseType.name());
   }
-
+  
+  public void SetClimberSpeed(double speed) {
+    SwingL.set(TalonFXControlMode.PercentOutput, speed);
+  }
+ 
   @Override
   public void periodic() {
-
+    //SmartDashboard.putNumber("Release Position", ReleaseMotor.getSensorCollection().getIntegratedSensorAbsolutePosition());
     // This method will be called once per scheduler run
   }
 }

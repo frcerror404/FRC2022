@@ -1,6 +1,7 @@
 // Key subsystems such as the main subsystem file and constants.
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -34,6 +35,17 @@ public class Drivebase extends SubsystemBase {
   @Override
   public void periodic() {
     drivetrain.feedWatchdog();
+
+    try {
+      SmartDashboard.putNumber("Drivetrain Temp (FL):", LeftMaster.getTemperature());
+      SmartDashboard.putNumber("Drivetrain Temp (FR):", LeftSlave.getTemperature());
+      SmartDashboard.putNumber("Drivetrain Temp (BL):", RightMaster.getTemperature());
+      SmartDashboard.putNumber("Drivetrain Temp (BR):", RightSlave.getTemperature());
+    } catch(Exception e) {
+      System.out.println("Temperature Stale");
+    }
+
+    
   }
 
   @Override

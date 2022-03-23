@@ -5,24 +5,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.lib.ReleaseType;
 import frc.robot.subsystems.MartianClimbers;
 
-public class SetRelease extends InstantCommand {
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class SetMartianClimberSpeed extends InstantCommand {
   private final MartianClimbers m_martianClimbers;
-  private final ReleaseType m_releaseType;
-  /** Creates a new SetRelease. */
-  public SetRelease(MartianClimbers climbers, ReleaseType releaseType) {
+  private double m_speed;
+  public SetMartianClimberSpeed(MartianClimbers climbers, double speed) {
     m_martianClimbers = climbers;
-    m_releaseType = releaseType;
-
+    m_speed = speed;
     addRequirements(m_martianClimbers);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //m_martianClimbers.SetRelease(m_releaseType);
-    m_martianClimbers.SetReleaseByPercentage(m_releaseType);
+    m_martianClimbers.SetClimberSpeed(m_speed);
   }
 }

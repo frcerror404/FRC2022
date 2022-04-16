@@ -37,6 +37,7 @@ import frc.robot.commands.TurnOffIntake;
 import frc.robot.commands.TurnOnShooter;
 import frc.robot.commands.Autonomous.Commands.ReverseIntake;
 import frc.robot.commands.Autonomous.Commands.TurnInPlaceXDegrees;
+import frc.robot.commands.Autonomous.Modes.FinalsAuto;
 import frc.robot.commands.Autonomous.Modes.FourBallAuton;
 import frc.robot.commands.Autonomous.Modes.NoOpAuton;
 import frc.robot.commands.Autonomous.Modes.OneBallAuton;
@@ -84,8 +85,9 @@ public class RobotContainer {
 
     m_chooser.addOption("Disable Auton", new NoOpAuton());
     m_chooser.addOption("One Ball Auton", new OneBallAuton(drivebase, shooter, indexer));
-    m_chooser.setDefaultOption("Two Ball Auton", new TwoBallAuton(drivebase, shooter, indexer, intake));
+    m_chooser.addOption("Two Ball Auton", new TwoBallAuton(drivebase, shooter, indexer, intake));
     m_chooser.addOption("Two Ball Short Auton", new TwoBallShortAuton(drivebase, shooter, indexer, intake));
+    m_chooser.setDefaultOption("Finals Auto", new FinalsAuto(drivebase, shooter, indexer, intake));
     // m_chooser.addOption("Rotate 90", new FourBallAuton(drivebase, imu, 90, .6));
     // m_chooser.addOption("Rotate -30", new FourBallAuton(drivebase, imu, -30, .6));
     // m_chooser.addOption("Rotate 180", new FourBallAuton(drivebase, imu, 180, .6));

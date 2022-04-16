@@ -51,7 +51,7 @@ public final class Constants {
 
 
     
-    public static double kDrivetrainLowSpeedMultiplier = .75;
+    public static double kDrivetrainLowSpeedMultiplier = 0.75;
 
     // true = arcade drive, false = tank drive
     public static boolean isCurvatureDrive = false;

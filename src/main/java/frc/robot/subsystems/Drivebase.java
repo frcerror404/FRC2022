@@ -36,14 +36,14 @@ public class Drivebase extends SubsystemBase {
   public void periodic() {
     drivetrain.feedWatchdog();
 
-    try {
-      SmartDashboard.putNumber("Drivetrain Temp (FL):", LeftMaster.getTemperature());
-      SmartDashboard.putNumber("Drivetrain Temp (FR):", LeftSlave.getTemperature());
-      SmartDashboard.putNumber("Drivetrain Temp (BL):", RightMaster.getTemperature());
-      SmartDashboard.putNumber("Drivetrain Temp (BR):", RightSlave.getTemperature());
-    } catch(Exception e) {
-      System.out.println("Temperature Stale");
-    }
+    // try {
+    //   SmartDashboard.putNumber("Drivetrain Temp (FL):", LeftMaster.getTemperature());
+    //   SmartDashboard.putNumber("Drivetrain Temp (FR):", LeftSlave.getTemperature());
+    //   SmartDashboard.putNumber("Drivetrain Temp (BL):", RightMaster.getTemperature());
+    //   SmartDashboard.putNumber("Drivetrain Temp (BR):", RightSlave.getTemperature());
+    // } catch(Exception e) {
+    //   System.out.println("Temperature Stale");
+    // }
 
     
   }
